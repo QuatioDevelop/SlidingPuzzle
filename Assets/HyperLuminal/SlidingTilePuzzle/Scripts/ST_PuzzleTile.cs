@@ -23,26 +23,32 @@ public class ST_PuzzleTile : MonoBehaviour
 	public Vector2 ArrayLocation = new Vector2();
 	public Vector2 GridLocation = new Vector2();
 
-	GameObject CanvasP;
-	GameObject CanvasA;
+    public references refe;
 
-	
 
-	void Awake()
+    GameObject CanvasP;
+    GameObject CanvasA;
+
+
+    void Awake()
 	{
 		// assign the new target position.
 		TargetPosition = this.transform.localPosition;
-		CanvasP = GameObject.FindGameObjectWithTag("EditorOnly");
-		CanvasA = GameObject.FindGameObjectWithTag("Respawn");
-		// start the movement coroutine to always move the objects to the new target position.
-		StartCoroutine(UpdatePosition());
+
+        refe = GameObject.FindWithTag("MainCamera").GetComponent<references>();
+
+        CanvasP = refe.CanvasP;
+        CanvasA = refe.CanvasA;
+
+        // start the movement coroutine to always move the objects to the new target position.
+        StartCoroutine(UpdatePosition());
 	}
 
     private void Start()
     {
 		if (!flag)
 		{
-			CanvasP.SetActive(false);
+            CanvasP.SetActive(false);
 			flag = true;
 		}
 	}
